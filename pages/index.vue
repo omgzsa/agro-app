@@ -18,15 +18,15 @@ async function onSubmit(event) {
 </script>
 
 <template>
-  <div class="grid place-content-center h-screen">
-    <div class="space-y-12">
+  <div class="grid h-screen place-content-center">
+    <UContainer class="space-y-12">
       <img
         src="assets/images/agrofeed-logo-login.webp"
         class="w-[200px] mx-auto"
         width="200"
         height="57"
       />
-      <div class="w-[500px]">
+      <div class="max-w-lg">
         <UForm
           :validate="validate"
           :state="state"
@@ -50,6 +50,6 @@ async function onSubmit(event) {
           <UButton type="submit"> Bejelentkezés </UButton>
         </UForm>
       </div>
-    </div>
+    </UContainer>
   </div>
 </template>
