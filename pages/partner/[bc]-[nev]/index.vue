@@ -1,5 +1,5 @@
 <script setup>
-const user = ref({ name: 'Goldavis Kft.' });
+const user = ref({ name: 'Goldavis Kft.', bc: 78 });
 </script>
 
 <template>
@@ -21,6 +21,6 @@ const user = ref({ name: 'Goldavis Kft.' });
       </UContainer>
     </div>
     <!-- nav -->
-    <NavPartner />
+    <NavPartner :name="user.name" :bc="user.bc" />
   </div>
 </template>
