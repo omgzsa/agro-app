@@ -5,6 +5,7 @@ const columns = [
   {
     key: 'datum',
     label: 'Szállítási dátum',
+    sortable: true,
   },
   {
     key: 'szamlaszam',
@@ -172,6 +173,7 @@ const filteredRows = computed(() => {
           icon: 'i-heroicons-circle-stack-20-solid',
           label: 'No items.',
         }"
+        :sort="{ column: 'datum' }"
       >
         <template #actions-data>
           <UButton
