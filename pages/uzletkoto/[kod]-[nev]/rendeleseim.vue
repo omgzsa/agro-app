@@ -125,8 +125,8 @@ const filteredRows = computed(() => {
     return orders;
   }
 
-  return orders.filter((person) => {
-    return Object.values(person).some((value) => {
+  return orders.filter((order) => {
+    return Object.values(order).some((value) => {
       return String(value).toLowerCase().includes(query.value.toLowerCase());
     });
   });
