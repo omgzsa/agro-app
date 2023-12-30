@@ -1,5 +1,5 @@
 <script setup>
-const user = ref({ name: 'Molnár István' });
+const user = ref({ name: 'Bolla Kálmán', kod: 'BK', bc: 243 });
 </script>
 
 <template>
@@ -21,7 +21,7 @@ const user = ref({ name: 'Molnár István' });
       </UContainer>
     </div>
     <!-- nav -->
-    <NavUzletkoto />
+    <NavUzletkoto :name="user.name" :kod="user.kod" />
     <!-- featured -->
     <UContainer>
       <div class="grid gap-4 pb-16 md:gap-8 sm:grid-cols-2 lg:grid-cols-3">

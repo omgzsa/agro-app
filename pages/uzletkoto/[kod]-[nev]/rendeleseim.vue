@@ -1,5 +1,5 @@
 <script setup>
-const user = ref({ name: 'Molnár István' });
+const user = ref({ name: 'Bolla Kálmán', kod: 'BK', bc: 243 });
 
 const columns = [
   {
@@ -152,7 +152,7 @@ const filteredRows = computed(() => {
       </UContainer>
     </div>
     <!-- nav -->
-    <NavUzletkoto />
+    <NavUzletkoto :name="user.name" :kod="user.kod" />
     <!-- orders -->
     <UContainer class="pb-16">
       <h2 class="mb-8">Rendeléseim</h2>
