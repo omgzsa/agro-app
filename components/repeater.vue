@@ -1,35 +1,3 @@
-<template>
-  <div class="grid max-w-4xl place-content-center">
-    <UForm :state="state" @submit="onSubmit" class="py-4">
-      <div
-        v-for="(item, index) in state.repeaterItems"
-        :key="item.id"
-        class="mb-4"
-      >
-        <RepeaterItem
-          :id="item.id"
-          :product="item.product"
-          :measure="item.measure"
-          :packaging="item.packaging"
-          :products="products"
-          :packagingOptions="packagingOptions"
-          @update:product="updateProduct(index, $event)"
-          @update:measure="updateMeasure(index, $event)"
-          @update:packaging="updatePackaging(index, $event)"
-          @remove="removeItem(item.id)"
-        />
-      </div>
-      <div class="flex gap-4">
-        <UButton @click="addItem">Új termék hozzáadása</UButton>
-        <UButton type="submit">Rendelés elküldése</UButton>
-      </div>
-    </UForm>
-    <pre>
-      {{ state }}
-    </pre>
-  </div>
-</template>
-
 <script setup>
 const products = [
   'AF-4322-OC/Fit/E/Tox/AP tt 2,5',
@@ -41,7 +9,7 @@ const packagingOptions = ['Zsákos', 'Ömlesztett', 'BigBag'];
 const state = reactive({
   repeaterItems: [
     {
-      id: generateUniqueId(),
+      id: 1,
       product: products[0],
       measure: 1,
       packaging: packagingOptions[0],
@@ -78,7 +46,7 @@ function removeItem(id) {
 }
 
 function generateUniqueId() {
-  return '_' + Math.random().toString(36).substr(2, 9);
+  return '_' + Math.random().toString(36).slice(2, 11);
 }
 
 async function onSubmit(event) {
@@ -86,3 +54,32 @@ async function onSubmit(event) {
   console.log(event.data);
 }
 </script>
+
+<template>
+  <div>
+    <UForm :state="state" @submit="onSubmit" class="py-4">
+      <div
+        v-for="(item, index) in state.repeaterItems"
+        :key="item.id"
+        class="mb-4"
+      >
+        <RepeaterItem
+          :id="item.id"
+          :product="item.product"
+          :measure="item.measure"
+          :packaging="item.packaging"
+          :products="products"
+          :packagingOptions="packagingOptions"
+          @update:product="updateProduct(index, $event)"
+          @update:measure="updateMeasure(index, $event)"
+          @update:packaging="updatePackaging(index, $event)"
+          @remove="removeItem(item.id)"
+        />
+      </div>
+      <div class="flex gap-4">
+        <UButton @click="addItem">Új termék hozzáadása</UButton>
+        <UButton type="submit">Rendelés elküldése</UButton>
+      </div>
+    </UForm>
+  </div>
+</template>
