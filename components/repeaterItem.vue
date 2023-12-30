@@ -1,0 +1,61 @@
+<template>
+  <div class="flex flex-row items-center gap-4">
+    <UFormGroup label="Termék">
+      <USelect
+        :value="product"
+        @update:modelValue="updateProduct"
+        :options="products"
+      />
+    </UFormGroup>
+    <UFormGroup label="Mennyiség (kg)">
+      <UInput
+        :value="measure"
+        @update:modelValue="updateMeasure"
+        type="number"
+        :min="1"
+      />
+    </UFormGroup>
+    <UFormGroup label="Kiszerelés">
+      <USelect
+        :value="packaging"
+        @update:modelValue="updatePackaging"
+        :options="packagingOptions"
+      />
+    </UFormGroup>
+    <Icon
+      @click="removeItem"
+      name="heroicons:minus-circle-16-solid"
+      class="mt-6 cursor-pointer"
+    />
+  </div>
+</template>
+
+<script setup>
+const { id, product, measure, packaging, products, packagingOptions } =
+  defineProps([
+    'id',
+    'product',
+    'measure',
+    'packaging',
+    'products',
+    'packagingOptions',
+  ]);
+const emit = defineEmits();
+
+function updateProduct(value) {
+  emit('update:product', value);
+}
+
+function updateMeasure(value) {
+  const validatedValue = Math.max(1, value);
+  emit('update:measure', validatedValue);
+}
+
+function updatePackaging(value) {
+  emit('update:packaging', value);
+}
+
+function removeItem() {
+  emit('remove', id);
+}
+</script>
