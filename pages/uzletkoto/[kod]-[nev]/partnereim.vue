@@ -146,7 +146,10 @@ const filteredRows = computed(() => {
         }"
       >
         <template #actions-data>
-          <UButton to="/partner" :ui="{ rounded: 'rounded-full' }">
+          <UButton
+            to="/partner/78-goldavis-kft"
+            :ui="{ rounded: 'rounded-full' }"
+          >
             Partnerhez
           </UButton>
         </template>
