@@ -143,7 +143,7 @@ const filteredRows = computed(() => {
   <div>
     <!-- header -->
     <div class="py-12 bg-agro-100">
-      <UContainer class="flex flex-col items-start sm:items-center">
+      <UContainer class="flex flex-col items-start sm:items-center gap-y-2">
         <img
           src="assets/images/agrofeed-logo-dashboard.webp"
           alt="agrofeed logo"
@@ -152,9 +152,15 @@ const filteredRows = computed(() => {
           class="w-48 h-12 mx-auto mb-16"
         />
         <h1 class="mb-2 text-white">Webshop irányítópult</h1>
-        <p class="text-2xl font-medium text-white">
+        <p class="mb-2 text-2xl font-medium text-white">
           Üdvözöljük, {{ user.name }}!
         </p>
+        <UButton
+          icon="i-heroicons-arrow-uturn-left-20-solid"
+          to="/uzletkoto/BK-bolla-kalman"
+          class="text-white"
+          >Vissza az irányítópulthoz</UButton
+        >
       </UContainer>
     </div>
     <!-- nav -->
