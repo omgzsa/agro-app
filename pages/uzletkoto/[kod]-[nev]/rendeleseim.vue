@@ -17,10 +17,12 @@ const columns = [
   {
     key: 'datum',
     label: 'Szállítási dátum',
+    sortable: true,
   },
   {
     key: 'kelte',
     label: 'Számla kelte',
+    sortable: true,
   },
   {
     key: 'leiras',
@@ -41,8 +43,8 @@ const orders = [
     szamlaszam: 'AF2300029',
     vevokod: 78,
     termekkod: 'K3462',
-    datum: '2023-01-06',
-    kelte: '2023-01-09',
+    datum: '2023-01-01',
+    kelte: '2023-01-10',
     leiras: 'AF-4322-OC/Fit/E/Tox/AP tt 2,5',
     mennyiseg: 2975,
     mertekegyseg: 'kg',
@@ -51,8 +53,8 @@ const orders = [
     szamlaszam: 'AF2300030',
     vevokod: 81,
     termekkod: 'Á3221',
-    datum: '2023-01-06',
-    kelte: '2023-01-09',
+    datum: '2023-02-06',
+    kelte: '2023-02-09',
     leiras: 'Vivafat (Quality fat)',
     mennyiseg: 1200,
     mertekegyseg: 'kg',
@@ -61,8 +63,8 @@ const orders = [
     szamlaszam: 'AF2300030',
     vevokod: 81,
     termekkod: 'K6821',
-    datum: '2023-01-06',
-    kelte: '2023-01-09',
+    datum: '2023-04-07',
+    kelte: '2023-04-10',
     leiras: 'AS-2625-P/NSP vemhes koca premix 3%',
     mennyiseg: 2010,
     mertekegyseg: 'kg',
@@ -71,8 +73,8 @@ const orders = [
     szamlaszam: 'AF2300030',
     vevokod: 81,
     termekkod: 'E0254',
-    datum: '2023-01-06',
-    kelte: '2023-01-09',
+    datum: '2023-01-12',
+    kelte: '2023-01-15',
     leiras: 'Arbocell RC Fine',
     mennyiseg: 1020,
     mertekegyseg: 'kg',
@@ -81,8 +83,8 @@ const orders = [
     szamlaszam: 'AF2300030',
     vevokod: 81,
     termekkod: 'K7080',
-    datum: '2023-01-06',
-    kelte: '2023-01-09',
+    datum: '2023-02-08',
+    kelte: '2023-02-11',
     leiras: 'AS-2516-P/NSP+ Szoptató koca px 4%',
     mennyiseg: 960,
     mertekegyseg: 'kg',
@@ -167,6 +169,7 @@ const filteredRows = computed(() => {
           icon: 'i-heroicons-circle-stack-20-solid',
           label: 'No items.',
         }"
+        :sort="{ columns: ['datum', 'kelte'] }"
       />
       <div
         class="flex justify-end py-3.5 border-t border-gray-200 dark:border-gray-700"
