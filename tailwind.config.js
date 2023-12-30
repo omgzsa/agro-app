@@ -15,7 +15,7 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      sans: ['Roboto', 'sans-serif'],
+      sans: ['Ubuntu', 'sans-serif'],
     },
     extend: {
       colors: {
@@ -23,10 +23,6 @@ module.exports = {
           100: '#0cb14b',
         },
       },
-      // gridTemplateColumns: {
-      //   'fill-16': 'repeat(auto-fill, minmax(4rem, 1fr))',
-      //   'fill-20': 'repeat(auto-fill, minmax(5rem, 1fr))',
-      // },
       screens: {
         // xs: '575px',
       },
