@@ -23,6 +23,7 @@ const slugName = computed(() => {
 <template>
   <UContainer>
     <nav class="grid py-16 place-content-center">
+      <!-- <DarkMode /> -->
       <ul class="flex flex-wrap items-center gap-x-4 gap-y-6">
         <li>
           <ULink
