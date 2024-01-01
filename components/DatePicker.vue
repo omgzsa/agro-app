@@ -23,17 +23,32 @@ const date = computed({
   },
 });
 
-const attrs = [
+const attrs = ref([
   {
-    key: 'today',
-    highlight: {
-      color: 'blue',
-      fillMode: 'outline',
-      class: '!bg-gray-100 dark:!bg-gray-800',
-    },
-    dates: new Date(),
+    highlight: 'red',
+    // Wrap lone date range in separate array to avoid rendering as multiple dates
+    dates: [[new Date(2024, 0, 2), new Date(2024, 0, 9)]],
   },
-];
+]);
+
+/*
+TODOS:
+
+- 9től rendelhet
+- szállítási napok, 1,2,5,7
+*/
+
+const disabledDates = ref([
+  {
+    // start: new Date(2024, 0, 2),
+    // end: new Date(2024, 0, 9),
+    repeat: {
+      weekdays: [1, 2, 5, 7],
+    },
+  },
+]);
+
+// const disabledDates = ref([{ start: new Date(2024, 1, 8), end: null }]);
 </script>
 
 <template>
@@ -45,6 +60,6 @@ const attrs = [
     :is-dark="isDark"
     title-position="left"
     trim-weeks
-    :first-day-of-week="2"
+    :disabled-dates="disabledDates"
   />
 </template>
