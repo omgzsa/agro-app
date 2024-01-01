@@ -7,6 +7,7 @@ const user = ref({
   address: 'Zöldfa utca 1.',
 });
 
+const router = useRouter();
 const toast = useToast();
 
 const products = [
@@ -145,6 +146,7 @@ async function onSubmit(event) {
       'Rendelését sikeresen elküldte! Feldolgozás után email értesítést kap.',
   });
   console.log(event.data);
+  router.push('/partner/0032-agro-m-zrt-');
 }
 
 console.log(state.deliveryDate);
@@ -221,10 +223,7 @@ console.log(state.deliveryDate);
               />
 
               <template #panel="{ close }">
-                <LazyDatePicker
-                  :model-value="state.deliveryDate"
-                  @close="close"
-                />
+                <LazyDatePicker v-model="state.deliveryDate" @close="close" />
               </template>
             </UPopover>
           </UFormGroup>

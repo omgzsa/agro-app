@@ -2,6 +2,7 @@
 const route = useRoute();
 const allEntries = ref([]);
 const toast = useToast();
+const router = useRouter();
 
 // onMounted(() => {
 // Parse the JSON string back into an object
@@ -162,6 +163,7 @@ async function onSubmit(event) {
       'Rendelését sikeresen elküldte! Feldolgozás után email értesítést kap.',
   });
   console.log(event.data);
+  router.push('/partner/0032-agro-m-zrt-');
 }
 </script>
 
