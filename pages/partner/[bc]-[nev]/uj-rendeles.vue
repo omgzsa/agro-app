@@ -7,6 +7,8 @@ const user = ref({
   address: 'Zöldfa utca 1.',
 });
 
+const toast = useToast();
+
 const products = [
   'VTP-130-SC/U Tejelő tehén 5%',
   'AS-22972-P+/NSP malac px 3,5%',
@@ -138,9 +140,14 @@ function generateUniqueId() {
 }
 
 async function onSubmit(event) {
-  // Do something with data
+  toast.add({
+    title:
+      'Rendelését sikeresen elküldte! Feldolgozás után email értesítést kap.',
+  });
   console.log(event.data);
 }
+
+console.log(state.deliveryDate);
 </script>
 
 <template>
@@ -214,7 +221,10 @@ async function onSubmit(event) {
               />
 
               <template #panel="{ close }">
-                <LazyDatePicker v-model="state.deliveryDate" @close="close" />
+                <LazyDatePicker
+                  :model-value="state.deliveryDate"
+                  @close="close"
+                />
               </template>
             </UPopover>
           </UFormGroup>
@@ -253,8 +263,8 @@ async function onSubmit(event) {
           </UFormGroup>
         </div>
 
-        <div class="col-span-1">
-          <UButton type="submit"> Rendelés elküldése </UButton>
+        <div class="col-span-2">
+          <UButton type="submit" size="xl"> Rendelés elküldése </UButton>
         </div>
       </UForm>
     </UContainer>

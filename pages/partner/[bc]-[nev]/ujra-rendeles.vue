@@ -1,6 +1,7 @@
 <script setup>
 const route = useRoute();
 const allEntries = ref([]);
+const toast = useToast();
 
 // onMounted(() => {
 // Parse the JSON string back into an object
@@ -156,7 +157,10 @@ function generateUniqueId() {
 }
 
 async function onSubmit(event) {
-  // Do something with data
+  toast.add({
+    title:
+      'Rendelését sikeresen elküldte! Feldolgozás után email értesítést kap.',
+  });
   console.log(event.data);
 }
 </script>
