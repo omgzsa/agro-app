@@ -27,12 +27,7 @@ async function onSubmit(event) {
         height="57"
       />
       <div class="max-w-lg">
-        <UForm
-          :validate="validate"
-          :state="state"
-          class="space-y-6"
-          @submit="onSubmit"
-        >
+        <UForm :validate="validate" :state="state" class="space-y-6">
           <UFormGroup label="Email" name="email" required>
             <UInput v-model="state.email" />
           </UFormGroup>
@@ -42,12 +37,14 @@ async function onSubmit(event) {
           </UFormGroup>
 
           <p>
-            Aktív Agrofeed partner szerződéssel rendelkezők jelentkezhetnek be,
-            a szerződésben megadott email címükkel. Ha nem tud bejelentkezni
-            kattintson ide a segítségért.
+            Aktív Agrofeed partner szerződéssel rendelkezők jelentkezhetnek be a
+            szerződésben megadott email címükkel. Ha nem tud bejelentkezni
+            keresse ügyfélszolgálatunkat.
           </p>
 
-          <UButton type="submit"> Bejelentkezés </UButton>
+          <UButton size="xl" to="/uzletkoto/BK-bolla-kalman">
+            Bejelentkezés
+          </UButton>
         </UForm>
       </div>
     </UContainer>
