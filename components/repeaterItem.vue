@@ -1,35 +1,3 @@
-<template>
-  <div class="flex flex-row items-center gap-6">
-    <UFormGroup label="Termék">
-      <USelect
-        :value="product"
-        @update:modelValue="updateProduct"
-        :options="products"
-      />
-    </UFormGroup>
-    <UFormGroup label="Mennyiség (kg)">
-      <UInput
-        :value="measure"
-        @update:modelValue="updateMeasure"
-        type="number"
-        :min="1"
-      />
-    </UFormGroup>
-    <UFormGroup label="Kiszerelés">
-      <USelect
-        :value="packaging"
-        @update:modelValue="updatePackaging"
-        :options="packagingOptions"
-      />
-    </UFormGroup>
-    <Icon
-      @click="removeItem"
-      name="heroicons:minus-circle-16-solid"
-      class="mt-6 cursor-pointer"
-    />
-  </div>
-</template>
-
 <script setup>
 const { id, product, measure, packaging, products, packagingOptions } =
   defineProps([
@@ -59,3 +27,40 @@ function removeItem() {
   emit('remove', id);
 }
 </script>
+
+<template>
+  <div class="flex flex-row items-center gap-6">
+    <UFormGroup label="Termék">
+      <USelectMenu
+        searchable
+        searchable-placeholder="Termék keresése"
+        placeholder="Termék kiválasztása"
+        :value="product"
+        @update:modelValue="updateProduct"
+        :options="products"
+        class="w-96"
+        :model-value="product"
+      />
+    </UFormGroup>
+    <UFormGroup label="Mennyiség (kg)">
+      <UInput
+        :value="measure"
+        @update:modelValue="updateMeasure"
+        type="number"
+        :min="1"
+      />
+    </UFormGroup>
+    <UFormGroup label="Kiszerelés">
+      <USelect
+        :value="packaging"
+        @update:modelValue="updatePackaging"
+        :options="packagingOptions"
+      />
+    </UFormGroup>
+    <Icon
+      @click="removeItem"
+      name="heroicons:minus-circle-16-solid"
+      class="mt-6 cursor-pointer"
+    />
+  </div>
+</template>
