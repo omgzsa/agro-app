@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 const props = defineProps({
   name: String,
-  bc: Number,
+  bc: [Number, String],
 });
 
 const slugName = computed(() => {
@@ -45,7 +45,7 @@ const slugName = computed(() => {
         </li>
         <li>
           <ULink
-            :to="`/partner/${props.bc}-${slugName}/segitseg-nyujtas`"
+            to="https://afshop.previsionlab.hu/golddavis-5/segitsegnyujtas/"
             active-class="text-white bg-agro-100"
             inactive-class="text-gray-800 bg-yellow-400 hover:bg-yellow-300"
             class="px-4 py-2 text-sm font-bold rounded-full"
