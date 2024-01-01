@@ -67,7 +67,7 @@ const slugName = computed(() => {
         </li> -->
         <li>
           <ULink
-            :to="`/uzletkoto/${props.kod}-${slugName}/segitseg-nyujtas`"
+            to="https://afshop.previsionlab.hu/iranyitopult/segitsegnyujtas-uzletkoto/"
             active-class="text-white bg-agro-100"
             inactive-class="text-gray-800 bg-yellow-400 hover:bg-yellow-300"
             class="px-4 py-2 text-sm font-bold rounded-full"
