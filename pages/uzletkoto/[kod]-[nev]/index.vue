@@ -36,7 +36,7 @@ const user = ref({ name: 'Bolla Kálmán', kod: 'BK', bc: 243 });
             <span class="text-xs text-gray-400">Ebben a hónapban</span>
           </template>
 
-          <span class="text-xl font-bold">7</span>
+          <span class="text-xl font-bold">&mdash;</span>
         </UCard>
         <UCard :ui="{ divide: '', shadow: 'shadow-md' }" class="text-center">
           <template #header>
@@ -46,12 +46,12 @@ const user = ref({ name: 'Bolla Kálmán', kod: 'BK', bc: 243 });
                 size="40"
                 class="mb-2 text-agro-100"
               />
-              <h4>Partnereim száma</h4>
+              <h4>Webshopban aktív partnerek</h4>
               <span class="text-xs text-gray-400">Ebben a hónapban</span>
             </div>
           </template>
 
-          <span class="text-xl font-bold">15</span>
+          <span class="text-xl font-bold">&mdash;</span>
         </UCard>
         <UCard :ui="{ divide: '', shadow: 'shadow-md' }" class="text-center">
           <template #header>
@@ -64,9 +64,7 @@ const user = ref({ name: 'Bolla Kálmán', kod: 'BK', bc: 243 });
             <span class="text-xs text-gray-400">Ebben a hónapban</span>
           </template>
 
-          <span class="text-xl font-bold"
-            >AF-4322-OC/Fit/E/Tox/AP tt 2,5 L-Lysine HCL 98% zsákos</span
-          >
+          <span class="text-xl font-bold">&mdash;</span>
         </UCard>
       </div>
     </UContainer>
