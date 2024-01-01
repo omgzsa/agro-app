@@ -2,12 +2,14 @@
 import { useGroupBy } from '@/composables/groupBy';
 import rendelesek from '@/assets/0032-rendelesek.json';
 
-const user = ref({ name: 'Goldavis Kft.', bc: 78 });
+const router = useRouter();
+
+const user = ref({ name: 'Agro-M Zrt.', bc: '0032' });
 
 const q = ref('');
 const isOpen = ref(false);
 const page = ref(1);
-const pageCount = 8;
+const pageCount = 20;
 const selectedEntries = ref([]);
 const columns = [
   {
@@ -15,11 +17,16 @@ const columns = [
     label: 'Számlaszám',
   },
   {
+    key: 'documentNum',
+    label: 'Rendelés szám',
+  },
+  {
     key: 'shipmentDate',
     label: 'Szállítási dátum',
   },
   {
     key: 'actions',
+    label: 'Műveletek',
   },
 ];
 
@@ -28,7 +35,7 @@ const items = (row) => [
     {
       label: 'Rendelés újra',
       icon: 'i-heroicons-plus-circle-20-solid',
-      click: () => console.log('Edit', row.id),
+      click: () => goToOrderWithParams(row.entries),
     },
     {
       label: 'Megtekintés',
@@ -44,6 +51,14 @@ const openModal = (entries) => {
   isOpen.value = true;
 };
 
+const goToOrderWithParams = (entries) => {
+  const entriesString = JSON.stringify(entries);
+  router.push({
+    path: `/partner/0032-agro-m-zrt-/ujra-rendeles`,
+    query: { allEntries: entriesString },
+  });
+};
+
 // 1. GROUP ARRAY BY ORDER NO
 const { groupedArray } = useGroupBy(rendelesek.value, (item) => item.Order_No);
 
@@ -51,7 +66,8 @@ const { groupedArray } = useGroupBy(rendelesek.value, (item) => item.Order_No);
 const formattedArray = groupedArray.map((group) => {
   const orderNo = group[0].Order_No;
   const shipmentDate = group[0].Shipment_Date;
-  return { id: orderNo, shipmentDate, entries: group };
+  const documentNum = group[0].Document_No;
+  return { id: orderNo, shipmentDate, documentNum, entries: group };
 });
 
 // 3. PAGINATE THE FORMATTED ARRAY
@@ -117,11 +133,17 @@ const filteredRows = computed(() => {
       <UModal v-model="isOpen">
         <div class="p-4">
           <div v-for="entry in selectedEntries" :key="entry" class="p-2">
-            <p>{{ entry.Document_No }}</p>
-            <p>{{ entry.No }}</p>
-            <p>{{ entry.Description }}</p>
+            <p>
+              <span class="text-agro-100">Rendelés szám:</span>
+              {{ entry.Document_No }}
+            </p>
+            <p><span class="text-agro-100">Termék kód:</span> {{ entry.No }}</p>
+            <p>
+              <span class="text-agro-100">Termék:</span> {{ entry.Description }}
+            </p>
             <p class="pb-2">
-              {{ entry.Amount }} <span>{{ entry.Unit_of_Measure }}</span>
+              <span class="text-agro-100">Mennyiség:</span> {{ entry.Amount }}
+              <span>{{ entry.Unit_of_Measure }}</span>
             </p>
             <hr />
           </div>
@@ -131,9 +153,9 @@ const filteredRows = computed(() => {
         <template #actions-data="{ row }">
           <UDropdown :items="items(row)">
             <UButton
-              color="gray"
+              color="primary"
               variant="ghost"
-              icon="i-heroicons-ellipsis-horizontal-20-solid"
+              icon="i-heroicons-information-circle-16-solid"
             />
           </UDropdown>
         </template>
