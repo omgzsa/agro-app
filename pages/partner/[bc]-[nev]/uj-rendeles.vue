@@ -1,14 +1,78 @@
 <script setup>
-const user = ref({ name: 'Goldavis Kft.', bc: 78 });
+const user = ref({
+  name: 'Agro-M Zrt.',
+  bc: '0032',
+  city: 'Orosháza',
+  postCode: 5900,
+  address: 'Zöldfa utca 1.',
+});
 
 const products = [
-  'AF-4322-OC/Fit/E/Tox/AP tt 2,5',
-  'Szójadara II.o.46%',
-  'AF-4300-Tox/E/AP Tt csibe 4%',
+  'VTP-130-SC/U Tejelő tehén 5%',
+  'AS-22972-P+/NSP malac px 3,5%',
+  'AS-1000 Amox Zero prest.',
+  'Pigipro 1 Milk Care',
+  'Kukoricacsíra zsákos (darált)',
+  'Arbocell RC Fine',
+  'Ammónium klorid',
+  'Szójahéj zsákos, darált',
+  'Takarmánysó - Ért. - zsák',
+  'VTP-110-U Tejelő tehén px.4%',
+  'Nátrium-hidrogén-karbonát',
+  'Takarmánymész 0,02 - 1,25 mm',
+  'Kukoricacsíra zsákos (darált)',
+  'AS-2499-P+/NSP Sertés hízó 1 kpx 3%',
+  'AS-5097 Tutti Babyst.',
+  'AS-24991-P/NSP Sertés hízó 2 kpx 3%',
+  'AS-5750 Zeusz kantáp BAG',
+  'AS-22972-P+/NSP malac px 3,5%',
+  'AS-3274-S BEST malac starter koncentrátum 10%',
+  'AS-1000 Amox Zero prest.',
+  'AS-2599-P/NSP Szoptató koca kpx 4%',
+  'BasDiar',
+  'AS-26991 P/NSP Vemhes koca kpx 3,5%',
+  'Szójahéj zsákos, darált',
+  'Kukoricacsíra zsákos (darált)',
+  'AS-2499-P+/NSP Sertés hízó 1 kpx 3%',
+  'AS-24991-P/NSP Sertés hízó 2 kpx 3%',
+  'AS-22972-P+/NSP malac px 3,5%',
+  'Dextróz',
+  'AS-3274-S BEST malac starter koncentrátum 10%',
+  'AS-2599-P/NSP Szoptató koca kpx 4%',
+  'AS-26991 P/NSP Vemhes koca kpx 3,5%',
+  'Szójahéj zsákos, darált',
+  'VBT-201A Borjú indító tak',
+  'Magnézium-oxid',
+  'VivaStart',
+  'Nyalósó szelénes 5 kg',
+  'Takarmánysó - Ért. - zsák',
+  'VTK-1550-Glüka Liver tejelő k',
+  'VTP-110-U Tejelő tehén px.4%',
+  'Takarmánymész 0,02 - 1,25 mm',
+  'Nyalósó szelénes 5 kg',
+  'Takarmánysó - Ért. - zsák',
+  'VBT-201A Borjú indító tak',
+  'VTP-110-U Tejelő tehén px.4%',
+  'VTK-1550-Glüka Liver tejelő k',
+  'Nátrium-hidrogén-karbonát',
+  'Takarmánymész 0,02 - 1,25 mm',
+  'AS-1000 Amox Zero prest.',
+  'AS-3274-S BEST malac starter koncentrátum 10%',
+  'Szójahéj zsákos, darált',
+  'Kukoricacsíra zsákos (darált)',
+  'Arbocell RC Fine',
+  'Ammónium klorid',
+  'AS-2499-P+/NSP Sertés hízó 1 kpx 3%',
+  'AS-24991-P/NSP Sertés hízó 2 kpx 3%',
+  'AS-5750 Zeusz kantáp BAG',
+  'Jefo Sp',
+  'AS-22972-P+/NSP malac px 3,5%',
+  'Nyalósó natúr 5 kg',
+  'VivaStart',
+  'VTP-110-U Tejelő tehén px.4%',
+  'Full-fat szója',
 ];
 const packagingOptions = ['Zsákos', 'Ömlesztett', 'BigBag'];
-
-// const date = ref(new Date());
 
 const state = reactive({
   repeaterItems: [
@@ -27,8 +91,13 @@ const state = reactive({
   deliveryAddress: undefined,
 });
 
+state.deliveryName = user.value.name;
+state.deliveryCity = user.value.city;
+state.deliveryPostcode = user.value.postCode;
+state.deliveryAddress = user.value.address;
+
 const label = computed(() =>
-  state.deliveryDate.toLocaleDateString('hu-hu', {
+  state.deliveryDate.toLocaleDateString('hu-HU', {
     weekday: 'long',
     year: 'numeric',
     month: 'short',
@@ -103,6 +172,13 @@ async function onSubmit(event) {
     <!-- NEW ORDER -->
     <UContainer class="pb-16">
       <h2 class="mb-8">Új rendelés</h2>
+      <UAlert
+        icon="i-heroicons-information-circle-16-solid"
+        color="primary"
+        variant="solid"
+        title="Minimális rendelési összmennyiség: 1000 kg"
+        class="mb-8"
+      />
       <UForm :state="state" class="grid grid-cols-6 gap-6" @submit="onSubmit">
         <!-- REPEATER -->
         <div class="col-span-full">
