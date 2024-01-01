@@ -27,7 +27,15 @@ const columns = [
 const query = ref('');
 
 const page = ref(1);
-const pageCount = 8;
+const pageCount = 20;
+
+const slugify = (str) => {
+  return str
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-zA-Z0-9]/g, '-')
+    .toLowerCase();
+};
 
 const paginatedAndFilteredRows = computed(() => {
   const startIndex = (page.value - 1) * pageCount;
@@ -87,9 +95,9 @@ const filteredRows = computed(() => {
           label: 'No items.',
         }"
       >
-        <template #actions-data>
+        <template #actions-data="{ row }">
           <UButton
-            to="/partner/78-goldavis-kft-"
+            :to="`/partner/${row.No}-${slugify(row.Name)}`"
             :ui="{ rounded: 'rounded-full' }"
           >
             Partnerhez
