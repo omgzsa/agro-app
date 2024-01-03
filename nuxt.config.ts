@@ -2,6 +2,9 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxt/ui', 'nuxt-directus', '@nuxtjs/google-fonts'],
+  build: {
+    transpile: ['@vuepic/vue-datepicker'],
+  },
   colorMode: {
     preference: 'light',
   },
