@@ -231,16 +231,7 @@ async function onSubmit(event) {
         <!-- DATEPICKER -->
         <div class="col-span-full">
           <UFormGroup label="Szállítási dátum" name="deliveryDate">
-            <UPopover :popper="{ placement: 'bottom-start' }">
-              <UButton
-                icon="i-heroicons-calendar-days-20-solid"
-                :label="label"
-              />
-
-              <template #panel="{ close }">
-                <LazyDatePicker v-model="state.deliveryDate" @close="close" />
-              </template>
-            </UPopover>
+            <agro-date-picker v-model="state.deliveryDate" />
           </UFormGroup>
         </div>
         <div class="col-span-full">

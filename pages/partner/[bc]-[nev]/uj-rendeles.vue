@@ -148,8 +148,6 @@ async function onSubmit(event) {
   console.log(event.data);
   router.push('/partner/0032-agro-m-zrt-');
 }
-
-console.log(state.deliveryDate);
 </script>
 
 <template>
@@ -216,16 +214,7 @@ console.log(state.deliveryDate);
         <!-- DATEPICKER -->
         <div class="col-span-full">
           <UFormGroup label="Szállítási dátum" name="deliveryDate">
-            <UPopover :popper="{ placement: 'bottom-start' }">
-              <UButton
-                icon="i-heroicons-calendar-days-20-solid"
-                :label="label"
-              />
-
-              <template #panel="{ close }">
-                <LazyDatePicker v-model="state.deliveryDate" @close="close" />
-              </template>
-            </UPopover>
+            <agro-date-picker v-model="state.deliveryDate" />
           </UFormGroup>
         </div>
         <div class="col-span-full">
