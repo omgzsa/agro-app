@@ -1,4 +1,9 @@
 <script setup>
+import { useAuthStore } from '@/stores/auth';
+
+const store = useAuthStore();
+const user = useDirectusUser();
+
 const state = reactive({
   email: undefined,
   password: undefined,
@@ -14,6 +19,7 @@ const validate = (state) => {
 async function onSubmit(event) {
   // Do something with data
   console.log(event.data);
+  store.userLogin(event.data);
 }
 </script>
 
@@ -26,8 +32,14 @@ async function onSubmit(event) {
         width="200"
         height="57"
       />
+      <div v-if="user">hello {{ user.email }}</div>
       <div class="max-w-lg">
-        <UForm :validate="validate" :state="state" class="space-y-6">
+        <UForm
+          :validate="validate"
+          :state="state"
+          @submit="onSubmit"
+          class="space-y-6"
+        >
           <UFormGroup label="Email" name="email" required>
             <UInput v-model="state.email" />
           </UFormGroup>
@@ -42,11 +54,10 @@ async function onSubmit(event) {
             keresse ügyfélszolgálatunkat.
           </p>
 
-          <UButton size="xl" to="/uzletkoto/BK-bolla-kalman">
-            Bejelentkezés
-          </UButton>
+          <UButton type="submit" size="xl"> Bejelentkezés </UButton>
         </UForm>
       </div>
+      <UButton @click="store.userLogout">Logout</UButton>
     </UContainer>
   </div>
 </template>
