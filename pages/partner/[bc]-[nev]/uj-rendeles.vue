@@ -1,4 +1,8 @@
 <script setup>
+definePageMeta({
+  middleware: 'auth',
+});
+
 const user = ref({
   name: 'Agro-M Zrt.',
   bc: '0032',

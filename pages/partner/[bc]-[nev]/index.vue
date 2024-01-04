@@ -2,6 +2,10 @@
 import { useGroupBy } from '@/composables/groupBy';
 import rendelesek from '@/assets/0032-rendelesek.json';
 
+definePageMeta({
+  // middleware: 'auth',
+});
+
 const router = useRouter();
 
 const user = ref({ name: 'Agro-M Zrt.', bc: '0032' });
