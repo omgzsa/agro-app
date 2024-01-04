@@ -8,6 +8,9 @@ const { id, product, measure, packaging, products, packagingOptions } =
     'products',
     'packagingOptions',
   ]);
+
+const measureValue = toRef(measure, 'measure');
+
 const emit = defineEmits();
 
 function updateProduct(value) {
@@ -43,11 +46,23 @@ function removeItem() {
       />
     </UFormGroup>
     <UFormGroup label="Mennyiség (kg)">
-      <UInput
+      <!-- <UInput
         :value="measure"
         @update:modelValue="updateMeasure"
         type="number"
         :min="1"
+      /> -->
+      <UInput
+        :value="measureValue"
+        @update:modelValue="updateMeasure"
+        type="text"
+        :min="1"
+        inputmode="numeric"
+        v-maska
+        data-maska="9 99#"
+        data-maska-tokens="9:[0-9]:repeated"
+        data-maska-reversed
+        @maska="(e) => (measureValue = e.detail.unmasked)"
       />
     </UFormGroup>
     <UFormGroup label="Kiszerelés">
