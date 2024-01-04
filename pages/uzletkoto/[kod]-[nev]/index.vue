@@ -1,4 +1,12 @@
 <script setup>
+import { useAuthStore } from '@/stores/auth';
+
+definePageMeta({
+  middleware: ['is-partner'],
+});
+
+const store = useAuthStore();
+
 const user = ref({ name: 'Bolla Kálmán', kod: 'BK', bc: 243 });
 </script>
 
@@ -18,6 +26,7 @@ const user = ref({ name: 'Bolla Kálmán', kod: 'BK', bc: 243 });
         <p class="text-2xl font-medium text-white">
           Üdvözöljük, {{ user.name }}!
         </p>
+        <UButton @click="store.userLogout">logout</UButton>
       </UContainer>
     </div>
     <!-- nav -->

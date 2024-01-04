@@ -1,4 +1,8 @@
 <script setup>
+definePageMeta({
+  middleware: ['auth', 'is-partner'],
+});
+
 const user = ref({ name: 'Bolla Kálmán', kod: 'BK', bc: 243 });
 
 const columns = [
