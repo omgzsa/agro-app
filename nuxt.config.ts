@@ -1,9 +1,20 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  modules: ['@nuxt/ui', 'nuxt-directus', '@nuxtjs/google-fonts'],
+  runtimeConfig: {
+    salesRole: process.env.DIRECTUS_SALES_ROLE,
+    partnerRole: process.env.DIRECTUS_PARTNER_ROLE,
+  },
+  modules: ['@nuxt/ui', 'nuxt-directus', '@nuxtjs/google-fonts', '@pinia/nuxt'],
   build: {
     transpile: ['@vuepic/vue-datepicker'],
+  },
+  directus: {
+    url: process.env.NUXT_DIRECTUS_URL,
+    // autoFetch: true,
+  },
+  pinia: {
+    autoImports: ['defineStore', 'acceptHMRUpdate'],
   },
   colorMode: {
     preference: 'light',
