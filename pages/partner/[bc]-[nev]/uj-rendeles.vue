@@ -99,15 +99,6 @@ state.deliveryCity = user.value.city;
 state.deliveryPostcode = user.value.postCode;
 state.deliveryAddress = user.value.address;
 
-const label = computed(() =>
-  state.deliveryDate.toLocaleDateString('hu-HU', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  })
-);
-
 function addItem() {
   state.repeaterItems.push({
     id: generateUniqueId(),
@@ -146,7 +137,7 @@ async function onSubmit(event) {
       'Rendelését sikeresen elküldte! Feldolgozás után email értesítést kap.',
   });
   console.log(event.data);
-  router.push('/partner/0032-agro-m-zrt-');
+  // router.push('/partner/0032-agro-m-zrt-');
 }
 </script>
 

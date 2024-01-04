@@ -10,7 +10,7 @@ const serializedEntries = route.query.allEntries;
 if (serializedEntries) {
   allEntries.value = JSON.parse(serializedEntries);
 }
-console.log(allEntries.value);
+// console.log(allEntries.value);
 // });
 
 const user = ref({
@@ -116,15 +116,6 @@ state.repeaterItems = allEntries.value.map((entry) => ({
   packaging: '',
 }));
 
-const label = computed(() =>
-  state.deliveryDate.toLocaleDateString('hu-HU', {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-  })
-);
-
 function addItem() {
   state.repeaterItems.push({
     id: generateUniqueId(),
@@ -163,7 +154,7 @@ async function onSubmit(event) {
       'Rendelését sikeresen elküldte! Feldolgozás után email értesítést kap.',
   });
   console.log(event.data);
-  router.push('/partner/0032-agro-m-zrt-');
+  // router.push('/partner/0032-agro-m-zrt-');
 }
 </script>
 
