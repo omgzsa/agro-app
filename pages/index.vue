@@ -54,7 +54,9 @@ async function onSubmit(event) {
             keresse ügyfélszolgálatunkat.
           </p>
 
-          <UButton type="submit" size="xl"> Bejelentkezés </UButton>
+          <UButton title="Bejelentkezés" type="submit" size="xl">
+            Bejelentkezés
+          </UButton>
         </UForm>
       </div>
       <UButton @click="store.userLogout">Logout</UButton>
