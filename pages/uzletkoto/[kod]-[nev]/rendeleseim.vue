@@ -1,46 +1,9 @@
 <script setup>
 definePageMeta({
-  middleware: ['auth', 'is-partner'],
+  // middleware: ['auth', 'is-partner'],
 });
 
 const user = ref({ name: 'Bolla Kálmán', kod: 'BK', bc: 243 });
-
-const columns = [
-  {
-    key: 'szamlaszam',
-    label: 'Számlaszám',
-  },
-  {
-    key: 'vevokod',
-    label: 'Vevőkód',
-  },
-  {
-    key: 'termekkod',
-    label: 'Termékkód',
-  },
-  {
-    key: 'datum',
-    label: 'Szállítási dátum',
-    sortable: true,
-  },
-  {
-    key: 'kelte',
-    label: 'Számla kelte',
-    sortable: true,
-  },
-  {
-    key: 'leiras',
-    label: 'Leírás',
-  },
-  {
-    key: 'mennyiseg',
-    label: 'Mennyiség',
-  },
-  {
-    key: 'mertekegyseg',
-    label: 'Mértékegység',
-  },
-];
 
 const orders = [
   {
@@ -114,76 +77,19 @@ const orders = [
     mertekegyseg: 'kg',
   },
 ];
-
-const query = ref('');
-
-const page = ref(1);
-const pageCount = 6;
-
-const paginatedAndFilteredRows = computed(() => {
-  const startIndex = (page.value - 1) * pageCount;
-  const endIndex = startIndex + pageCount;
-  return filteredRows.value.slice(startIndex, endIndex);
-});
-
-const filteredRows = computed(() => {
-  if (!query.value) {
-    return orders;
-  }
-
-  return orders.filter((order) => {
-    return Object.values(order).some((value) => {
-      return String(value).toLowerCase().includes(query.value.toLowerCase());
-    });
-  });
-});
 </script>
 
 <template>
   <div>
     <!-- header -->
-    <div class="py-12 bg-agro-100">
-      <UContainer class="flex flex-col items-start sm:items-center">
-        <img
-          src="assets/images/agrofeed-logo-dashboard.webp"
-          alt="agrofeed logo"
-          width="200"
-          height="57"
-          class="w-48 h-12 mx-auto mb-16"
-        />
-        <h1 class="mb-2 text-white">Webshop irányítópult</h1>
-        <p class="text-2xl font-medium text-white">
-          Üdvözöljük, {{ user.name }}!
-        </p>
-      </UContainer>
-    </div>
+    <UserHeader
+      title="Webshop irányítópult"
+      :name="user.name"
+      :is-visible="true"
+    />
     <!-- nav -->
     <NavUzletkoto :name="user.name" :kod="user.kod" />
     <!-- orders -->
-    <UContainer class="pb-16">
-      <h2 class="mb-8">Rendeléseim</h2>
-      <div class="flex py-3.5 border-b border-gray-200 dark:border-gray-700">
-        <UInput v-model="query" placeholder="Megrendelés keresése..." />
-      </div>
-
-      <UTable
-        :rows="paginatedAndFilteredRows"
-        :columns="columns"
-        :empty-state="{
-          icon: 'i-heroicons-circle-stack-20-solid',
-          label: 'No items.',
-        }"
-        :sort="{ columns: ['datum', 'kelte'] }"
-      />
-      <div
-        class="flex justify-end py-3.5 border-t border-gray-200 dark:border-gray-700"
-      >
-        <UPagination
-          v-model="page"
-          :page-count="pageCount"
-          :total="orders.length"
-        />
-      </div>
-    </UContainer>
+    <UserOrders title="Rendeléseim" :orders="orders" />
   </div>
 </template>
