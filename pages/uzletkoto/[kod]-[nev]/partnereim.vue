@@ -1,7 +1,7 @@
 <script setup>
 import partnerek from '@/assets/bk-partnerek.json';
 definePageMeta({
-  // middleware: ['auth', 'is-partner'],
+  middleware: ['auth', 'check-role'],
 });
 
 const user = ref({ name: 'Bolla Kálmán', kod: 'BK', bc: 243 });
