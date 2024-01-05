@@ -1,13 +1,31 @@
 <script setup>
-import { useAuthStore } from '@/stores/auth';
+import { useUserStore } from '@/stores/user';
+const { getUserById } = useDirectusUsers();
 
 definePageMeta({
-  // middleware: ['is-partner'],
+  middleware: ['auth', 'check-role'],
 });
 
-const store = useAuthStore();
+const store = useUserStore();
 
 const user = ref({ name: 'Bolla Kálmán', kod: 'BK', bc: 243 });
+
+const { data } = await useAsyncData('barmi', () =>
+  getUserById({
+    id: store.user.id,
+    params: {
+      fields: ['uzletkoto.*'],
+    },
+  })
+);
+/*
+TODOS:
+- get correct user data with relations
+- implement user data to page
+- share data to components
+*/
+
+console.log(data.value);
 </script>
 
 <template>
@@ -15,7 +33,7 @@ const user = ref({ name: 'Bolla Kálmán', kod: 'BK', bc: 243 });
     <!-- header -->
     <UserHeader
       title="Webshop irányítópult"
-      :name="user.name"
+      :name="store.fullName"
       :is-visible="true"
     />
 
