@@ -2,8 +2,10 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   runtimeConfig: {
-    salesRole: process.env.DIRECTUS_SALES_ROLE,
-    partnerRole: process.env.DIRECTUS_PARTNER_ROLE,
+    public: {
+      salesRole: process.env.DIRECTUS_SALES_ROLE,
+      partnerRole: process.env.DIRECTUS_PARTNER_ROLE,
+    },
   },
   modules: ['@nuxt/ui', 'nuxt-directus', '@nuxtjs/google-fonts', '@pinia/nuxt'],
   build: {
