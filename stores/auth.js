@@ -1,13 +1,14 @@
 import { useRouter } from 'vue-router';
 
 export const useAuthStore = defineStore('authStore', () => {
-  const user = useDirectusUser();
   const router = useRouter();
+  const { login } = useDirectusAuth();
+
   // state
+  const logError = ref(null);
 
   // actions = functions
   async function userLogin(credentials) {
-    const { login } = useDirectusAuth();
     try {
       await login(credentials);
       alert('Logged in successfully');
@@ -28,10 +29,9 @@ export const useAuthStore = defineStore('authStore', () => {
   }
 
   // getters = computed properties
-  const isLoggedIn = computed(() => !!user.value);
 
   return {
-    isLoggedIn,
+    logError,
     userLogin,
     userLogout,
   };
