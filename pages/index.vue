@@ -1,6 +1,10 @@
 <script setup>
 import { useAuthStore } from '@/stores/auth';
 
+definePageMeta({
+  middleware: 'to-index',
+});
+
 const store = useAuthStore();
 const user = useDirectusUser();
 
@@ -20,6 +24,10 @@ async function onSubmit(event) {
   // Do something with data
   console.log(event.data);
   store.userLogin(event.data);
+
+  // reset form
+  state.email = undefined;
+  state.password = undefined;
 }
 </script>
 
