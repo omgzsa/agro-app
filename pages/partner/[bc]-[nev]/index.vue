@@ -3,7 +3,7 @@ import { useGroupBy } from '@/composables/groupBy';
 import rendelesek from '@/assets/0032-rendelesek.json';
 
 definePageMeta({
-  middleware: 'auth',
+  // middleware: 'auth',
 });
 
 const router = useRouter();
