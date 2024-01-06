@@ -13,7 +13,7 @@ const { data: sales } = await useFetch(
   `https://admin.agrofeed.eu/items/uzletkoto/${user.value.data.uzletkoto[0].uzletkoto_uzletkotokod}`
 );
 
-console.log(sales.value.data);
+// console.log(sales.value.data);
 </script>
 
 <template>
