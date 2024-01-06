@@ -1,31 +1,19 @@
 <script setup>
-import { useUserStore } from '@/stores/user';
-const { getUserById } = useDirectusUsers();
+const directus_user = useDirectusUser();
 
 definePageMeta({
   middleware: ['auth', 'check-role'],
 });
 
-const store = useUserStore();
-
-const user = ref({ name: 'Bolla Kálmán', kod: 'BK', bc: 243 });
-
-const { data } = await useAsyncData('barmi', () =>
-  getUserById({
-    id: store.user.id,
-    params: {
-      fields: ['uzletkoto.*'],
-    },
-  })
+const { data: user } = await useFetch(
+  `https://admin.agrofeed.eu/users/${directus_user.value.id}?fields=first_name,last_name,uzletkoto.*`
 );
-/*
-TODOS:
-- get correct user data with relations
-- implement user data to page
-- share data to components
-*/
 
-console.log(data.value);
+const { data: sales } = await useFetch(
+  `https://admin.agrofeed.eu/items/uzletkoto/${user.value.data.uzletkoto[0].uzletkoto_uzletkotokod}`
+);
+
+console.log(sales.value.data);
 </script>
 
 <template>
@@ -33,12 +21,12 @@ console.log(data.value);
     <!-- header -->
     <UserHeader
       title="Webshop irányítópult"
-      :name="store.fullName"
+      :name="sales.data.nev"
       :is-visible="true"
     />
 
     <!-- nav -->
-    <NavUzletkoto :name="user.name" :kod="user.kod" />
+    <NavUzletkoto :name="sales.data.nev" :kod="sales.data.uzletkotokod" />
 
     <!-- featured -->
     <UserFeatured>

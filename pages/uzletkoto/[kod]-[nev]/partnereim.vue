@@ -1,10 +1,18 @@
 <script setup>
 import partnerek from '@/assets/bk-partnerek.json';
+const directus_user = useDirectusUser();
+
 definePageMeta({
   middleware: ['auth', 'check-role'],
 });
 
-const user = ref({ name: 'Bolla Kálmán', kod: 'BK', bc: 243 });
+const { data: user } = await useFetch(
+  `https://admin.agrofeed.eu/users/${directus_user.value.id}?fields=first_name,last_name,uzletkoto.*`
+);
+
+const { data: sales } = await useFetch(
+  `https://admin.agrofeed.eu/items/uzletkoto/${user.value.data.uzletkoto[0].uzletkoto_uzletkotokod}`
+);
 </script>
 
 <template>
@@ -12,11 +20,12 @@ const user = ref({ name: 'Bolla Kálmán', kod: 'BK', bc: 243 });
     <!-- header -->
     <UserHeader
       title="Webshop irányítópult"
-      :name="user.name"
+      :name="sales.data.nev"
       :is-visible="true"
     />
+
     <!-- nav -->
-    <NavUzletkoto :name="user.name" :kod="user.kod" />
+    <NavUzletkoto :name="sales.data.nev" :kod="sales.data.uzletkotokod" />
 
     <!-- partners -->
     <UserPartners title="Partnereim" :partners="partnerek" />
