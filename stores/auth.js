@@ -11,8 +11,8 @@ export const useAuthStore = defineStore('authStore', () => {
   async function userLogin(credentials) {
     try {
       await login(credentials);
-      alert('Logged in successfully');
-      router.push('/partner/0032-agro-m-zrt-');
+      console.log('Logged in successfully');
+      // router.push('/partner/0032-agro-m-zrt-');
     } catch (err) {
       err = createError({
         statusCode: err.statusCode,
