@@ -2,7 +2,7 @@ import { useRouter } from 'vue-router';
 
 export const useAuthStore = defineStore('authStore', () => {
   const router = useRouter();
-  const { login } = useDirectusAuth();
+  const { login, logout } = useDirectusAuth();
 
   // state
   const logError = ref(null);
@@ -23,7 +23,6 @@ export const useAuthStore = defineStore('authStore', () => {
   }
 
   async function userLogout() {
-    const { logout } = useDirectusAuth();
     await logout();
     router.push('/');
   }
