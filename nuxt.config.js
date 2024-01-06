@@ -13,7 +13,7 @@ export default defineNuxtConfig({
   },
   directus: {
     url: process.env.NUXT_DIRECTUS_URL,
-    token: process.env.NUXT_DIRECTUS_STATIC_TOKEN,
+    // token: process.env.NUXT_DIRECTUS_STATIC_TOKEN,
     // autoFetch: true,
   },
   pinia: {
