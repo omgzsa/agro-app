@@ -1,20 +1,20 @@
 <script lang="ts" setup>
-const props = defineProps({
-  name: String,
-  bc: [Number, String],
-});
+// const props = defineProps({
+//   name: String,
+//   bc: [Number, String],
+// });
 
-const slugName = computed(() => {
-  let slug;
-  if (props.name) {
-    slug = props.name
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .replace(/[^a-zA-Z0-9]/g, '-')
-      .toLowerCase();
-  }
-  return slug;
-});
+// const slugName = computed(() => {
+//   let slug;
+//   if (props.name) {
+//     slug = props.name
+//       .normalize('NFD')
+//       .replace(/[\u0300-\u036f]/g, '')
+//       .replace(/[^a-zA-Z0-9]/g, '-')
+//       .toLowerCase();
+//   }
+//   return slug;
+// });
 
 // console.log(slugName.value);
 </script>
@@ -25,7 +25,7 @@ const slugName = computed(() => {
       <ul class="flex flex-wrap items-center gap-x-4 gap-y-6">
         <li>
           <ULink
-            :to="`/partner/${props.bc}-${slugName}`"
+            :to="`/partner`"
             active-class="text-white bg-agro-100"
             inactive-class="text-gray-800 bg-yellow-400 hover:bg-yellow-300"
             class="px-4 py-2 text-sm font-bold rounded-full"
@@ -35,7 +35,7 @@ const slugName = computed(() => {
         </li>
         <li>
           <ULink
-            :to="`/partner/${props.bc}-${slugName}/uj-rendeles`"
+            :to="`/partner/uj-rendeles`"
             active-class="text-white bg-agro-100"
             inactive-class="text-gray-800 bg-yellow-400 hover:bg-yellow-300"
             class="px-4 py-2 text-sm font-bold rounded-full"
@@ -43,7 +43,7 @@ const slugName = computed(() => {
             Új rendelés
           </ULink>
         </li>
-        <li>
+        <!-- <li>
           <ULink
             to="https://afshop.previsionlab.hu/golddavis-5/segitsegnyujtas/"
             active-class="text-white bg-agro-100"
@@ -52,7 +52,7 @@ const slugName = computed(() => {
           >
             Segítségnyújtás
           </ULink>
-        </li>
+        </li> -->
       </ul>
     </nav>
   </UContainer>
