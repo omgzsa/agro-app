@@ -1,8 +1,4 @@
 <script lang="ts" setup>
-import { useAuthStore } from '@/stores/auth';
-
-const auth = useAuthStore();
-
 const { title } = defineProps({
   title: String,
   name: String,
@@ -24,7 +20,6 @@ const { title } = defineProps({
       <p v-if="isVisible" class="text-2xl font-medium text-white">
         Üdvözöljük, {{ name }}!
       </p>
-      <UButton @click="auth.userLogout()" class="mt-4"> Logout </UButton>
     </UContainer>
   </div>
 </template>
