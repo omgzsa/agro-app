@@ -1,4 +1,4 @@
-<script lang="ts" setup>
+<script setup>
 const { title, partners } = defineProps({
   title: String,
   partners: [Array, Object],
@@ -79,7 +79,7 @@ const filteredAndPaginatedLength = computed(() => {
     >
       <template #actions-data="{ row }">
         <UButton
-          :to="`/partner/${row.No}-${slugify(row.Name)}`"
+          :to="`/uzletkoto/partnereim/${row.No}-${slugify(row.Name)}`"
           :ui="{ rounded: 'rounded-full' }"
         >
           Partnerhez
