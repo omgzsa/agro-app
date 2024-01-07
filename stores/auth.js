@@ -24,6 +24,7 @@ export const useAuthStore = defineStore('authStore', () => {
 
   async function userLogout() {
     await logout();
+    console.log('Logged out');
     router.push('/');
   }
 
