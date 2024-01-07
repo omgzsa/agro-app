@@ -1,14 +1,14 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
   const { partnerRole, salesRole } = useRuntimeConfig().public;
   const user = useDirectusUser();
-
   const isLoggedIn = user.value !== null;
 
-  if (user.value?.role === salesRole && isLoggedIn) {
-    await navigateTo(`/uzletkoto/SZZ-szendrei-zoltan`);
+  // Check user role and disallow access to sales page if not sales
+  if (user.value?.role === partnerRole && isLoggedIn) {
+    return navigateTo('/partner');
   }
 
-  if (user.value?.role === partnerRole && isLoggedIn) {
-    await navigateTo(`/partner/SJ-suki-jozsefne`);
+  if (user.value?.role === salesRole && isLoggedIn) {
+    return navigateTo('/uzletkoto');
   }
 });
