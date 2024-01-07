@@ -1,9 +1,9 @@
 <script setup>
-definePageMeta({
-  // middleware: 'sales-or-partner',
-});
-
 import { useAuthStore } from '@/stores/auth';
+
+definePageMeta({
+  middleware: 'to-index',
+});
 
 const store = useAuthStore();
 const user = useDirectusUser();
@@ -24,6 +24,10 @@ async function onSubmit(event) {
   // Do something with data
   console.log(event.data);
   store.userLogin(event.data);
+
+  // reset form
+  state.email = undefined;
+  state.password = undefined;
 }
 </script>
 
@@ -58,7 +62,9 @@ async function onSubmit(event) {
             keresse ügyfélszolgálatunkat.
           </p>
 
-          <UButton type="submit" size="xl"> Bejelentkezés </UButton>
+          <UButton title="Bejelentkezés" type="submit" size="xl">
+            Bejelentkezés
+          </UButton>
         </UForm>
       </div>
       <UButton @click="store.userLogout">Logout</UButton>
