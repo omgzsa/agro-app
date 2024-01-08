@@ -1,23 +1,5 @@
 <script setup>
-// const props = defineProps({
-//   name: String,
-//   kod: String,
-//   bc: Number,
-// });
-
-// const slugName = computed(() => {
-//   let slug;
-//   if (props.name) {
-//     slug = props.name
-//       .normalize('NFD')
-//       .replace(/[\u0300-\u036f]/g, '')
-//       .replace(/[^a-zA-Z0-9]/g, '-')
-//       .toLowerCase();
-//   }
-//   return slug;
-// });
-
-// console.log(slugName.value);
+//
 </script>
 
 <template>
@@ -45,7 +27,7 @@
             Partnereim
           </ULink>
         </li>
-        <li>
+        <!-- <li>
           <ULink
             :to="`/uzletkoto/rendeleseim`"
             active-class="text-white bg-agro-100"
@@ -54,7 +36,7 @@
           >
             Rendeléseim
           </ULink>
-        </li>
+        </li> -->
         <!-- <li>
           <ULink
             to="/uzletkoto/sajat-rendeles"

@@ -1,22 +1,5 @@
 <script lang="ts" setup>
-// const props = defineProps({
-//   name: String,
-//   bc: [Number, String],
-// });
-
-// const slugName = computed(() => {
-//   let slug;
-//   if (props.name) {
-//     slug = props.name
-//       .normalize('NFD')
-//       .replace(/[\u0300-\u036f]/g, '')
-//       .replace(/[^a-zA-Z0-9]/g, '-')
-//       .toLowerCase();
-//   }
-//   return slug;
-// });
-
-// console.log(slugName.value);
+//
 </script>
 <template>
   <UContainer>
