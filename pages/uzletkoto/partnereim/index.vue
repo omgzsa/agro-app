@@ -1,7 +1,5 @@
 <script setup>
-import partnerek from '@/assets/bk-partnerek.json';
 const directus_user = useDirectusUser();
-const { getItems } = useDirectusItems();
 
 definePageMeta({
   middleware: ['auth', 'check-role'],
@@ -15,25 +13,23 @@ const { data: sales } = await useFetch(
   `https://admin.agrofeed.eu/items/uzletkoto/${user.value.data.uzletkoto[0].uzletkoto_uzletkotokod}`
 );
 
-// filter by üzletkotokod
+// const { data: ugyfel } = await useAsyncData('ugyfel', () => {
+//   getItems({
+//     collection: 'ugyfel',
+//     params: {
+//       filter: {
+//         _or: [
+//           { uzletkotokod1: { _eq: 'SZZ' } },
+//           { uzletkotokod2: { _eq: 'SZZ' } },
+//         ],
+//       },
+//     },
+//   });
+// });
 
 const { data: ugyfel } = await useFetch(
-  `https://admin.agrofeed.eu/items/ugyfel?filter[uzletkotokod1][_eq]=${user.value.data.uzletkoto[0].uzletkoto_uzletkotokod}`
+  `https://admin.agrofeed.eu/items/ugyfel?filter[_or][0][uzletkotokod1][_eq]=${sales.value.data.uzletkotokod}&filter[_or][1][uzletkotokod2][_eq]=${sales.value.data.uzletkotokod}`
 );
-
-const myugyfelz = await getItems({
-  collection: 'ugyfel',
-  params: {
-    filter: {
-      _or: [
-        { uzletkotokod1: { _eq: 'SZZ' } },
-        { uzletkotokod2: { _eq: 'SZZ' } },
-      ],
-    },
-  },
-});
-
-console.log(myugyfelz);
 </script>
 
 <template>
@@ -49,6 +45,6 @@ console.log(myugyfelz);
     <NavUzletkoto />
 
     <!-- partners -->
-    <UserPartners title="Partnereim" :partners="partnerek" />
+    <UserPartners title="Partnereim" :partnereim="ugyfel.data" />
   </div>
 </template>
