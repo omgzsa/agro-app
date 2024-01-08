@@ -4,7 +4,7 @@ const { partnerRole, salesRole } = useRuntimeConfig().public;
 const router = useRouter();
 
 definePageMeta({
-  // middleware: 'to-index',
+  middleware: 'to-index',
 });
 
 const store = useAuthStore();
