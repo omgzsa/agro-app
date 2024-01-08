@@ -11,18 +11,28 @@ const { id } = useRoute().params;
 import { useGroupBy } from '@/composables/groupBy';
 import rendelesek from '@/assets/0032-rendelesek.json';
 
+const directus_user = useDirectusUser();
+const base_url = useDirectusUrl();
+const { data: user } = await useFetch(
+  `${base_url}/users/${directus_user.value.id}?fields=first_name,last_name,uzletkoto.*`
+);
+
+const { data: sales } = await useFetch(
+  `${base_url}/items/uzletkoto/${user.value.data.uzletkoto[0].uzletkoto_uzletkotokod}`
+);
+
 definePageMeta({
   middleware: 'auth',
 });
 
 const router = useRouter();
 
-const user = ref({ name: 'Agro-M Zrt.', bc: '0032' });
+// const user = ref({ name: 'Agro-M Zrt.', bc: '0032' });
 
 const q = ref('');
 const isOpen = ref(false);
 const page = ref(1);
-const pageCount = 20;
+const pageCount = 12;
 const selectedEntries = ref([]);
 const columns = [
   {
@@ -114,21 +124,11 @@ const filteredRows = computed(() => {
 <template>
   <div>
     <!-- header -->
-    <div class="py-12 bg-agro-100">
-      <UContainer class="flex flex-col items-start sm:items-center gap-y-2">
-        <img
-          src="assets/images/agrofeed-logo-dashboard.webp"
-          alt="agrofeed logo"
-          width="200"
-          height="57"
-          class="w-48 h-12 mx-auto mb-16"
-        />
-        <h1 class="mb-2 text-white">Webshop irányítópult</h1>
-        <p class="mb-2 text-2xl font-medium text-white">
-          Üdvözöljük, {{ user.name }}!
-        </p>
-      </UContainer>
-    </div>
+    <UserHeader
+      title="Webshop irányítópult"
+      :name="sales.data.nev"
+      :is-visible="true"
+    />
     <!-- nav -->
     <NavUzletkoto />
     <!-- orders -->
