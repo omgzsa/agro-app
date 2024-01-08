@@ -16,8 +16,6 @@ const { data: partner } = await useFetch(
   `${base_url}/items/ugyfel/${user.value.data.ugyfel[0].ugyfel_No}`
 );
 
-// console.log(partner.value.data);
-
 const products = [
   'VTP-130-SC/U Tejelő tehén 5%',
   'AS-22972-P+/NSP malac px 3,5%',
