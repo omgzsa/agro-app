@@ -1,16 +1,17 @@
 <script setup>
 const directus_user = useDirectusUser();
+const base_url = useDirectusUrl();
 
 definePageMeta({
   middleware: ['auth', 'check-role'],
 });
 
 const { data: user } = await useFetch(
-  `https://admin.agrofeed.eu/users/${directus_user.value.id}?fields=first_name,last_name,uzletkoto.*`
+  `${base_url}/users/${directus_user.value.id}?fields=first_name,last_name,uzletkoto.*`
 );
 
 const { data: sales } = await useFetch(
-  `https://admin.agrofeed.eu/items/uzletkoto/${user.value.data.uzletkoto[0].uzletkoto_uzletkotokod}`
+  `${base_url}/items/uzletkoto/${user.value.data.uzletkoto[0].uzletkoto_uzletkotokod}`
 );
 
 // const { data: ugyfel } = await useAsyncData('ugyfel', () => {
@@ -28,7 +29,7 @@ const { data: sales } = await useFetch(
 // });
 
 const { data: ugyfel } = await useFetch(
-  `https://admin.agrofeed.eu/items/ugyfel?filter[_or][0][uzletkotokod1][_eq]=${sales.value.data.uzletkotokod}&filter[_or][1][uzletkotokod2][_eq]=${sales.value.data.uzletkotokod}`
+  `${base_url}/items/ugyfel?filter[_or][0][uzletkotokod1][_eq]=${sales.value.data.uzletkotokod}&filter[_or][1][uzletkotokod2][_eq]=${sales.value.data.uzletkotokod}`
 );
 </script>
 
