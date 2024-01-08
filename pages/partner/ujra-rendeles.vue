@@ -1,12 +1,14 @@
 <script setup>
 definePageMeta({
-  // middleware: 'auth',
+  middleware: 'auth',
 });
 
 const route = useRoute();
-const allEntries = ref([]);
-const toast = useToast();
 const router = useRouter();
+const toast = useToast();
+const directus_user = useDirectusUser();
+const base_url = useDirectusUrl();
+const allEntries = ref([]);
 
 // onMounted(() => {
 // Parse the JSON string back into an object
@@ -17,13 +19,13 @@ if (serializedEntries) {
 // console.log(allEntries.value);
 // });
 
-const user = ref({
-  name: 'Agro-M Zrt.',
-  bc: '0032',
-  city: 'Orosháza',
-  postCode: 5900,
-  address: 'Zöldfa utca 1.',
-});
+const { data: user } = await useFetch(
+  `${base_url}/users/${directus_user.value.id}?fields=first_name,last_name,ugyfel.*`
+);
+
+const { data: partner } = await useFetch(
+  `${base_url}/items/ugyfel/${user.value.data.ugyfel[0].ugyfel_No}`
+);
 
 const products = [
   'VTP-130-SC/U Tejelő tehén 5%',
@@ -109,10 +111,11 @@ const state = reactive({
   deliveryAddress: undefined,
 });
 
-state.deliveryName = user.value.name;
-state.deliveryCity = user.value.city;
-state.deliveryPostcode = user.value.postCode;
-state.deliveryAddress = user.value.address;
+state.deliveryName = partner.value.data.nev;
+state.deliveryCity = partner.value.data.varos;
+state.deliveryPostcode = partner.value.data.iranyitoszam;
+state.deliveryAddress = partner.value.data.cim;
+
 state.repeaterItems = allEntries.value.map((entry) => ({
   id: generateUniqueId(),
   product: entry.Description,
@@ -165,23 +168,14 @@ async function onSubmit(event) {
 <template>
   <div>
     <!-- HEADER -->
-    <div class="py-12 bg-agro-100">
-      <UContainer class="flex flex-col items-start sm:items-center gap-y-2">
-        <img
-          src="assets/images/agrofeed-logo-dashboard.webp"
-          alt="agrofeed logo"
-          width="200"
-          height="57"
-          class="w-48 h-12 mx-auto mb-16"
-        />
-        <h1 class="mb-2 text-white">Webshop irányítópult</h1>
-        <p class="mb-2 text-2xl font-medium text-white">
-          Üdvözöljük, {{ user.name }}!
-        </p>
-      </UContainer>
-    </div>
+    <UserHeader
+      title="Webshop irányítópult"
+      :name="partner.data.nev"
+      :is-visible="true"
+    />
+
     <!-- NAV -->
-    <NavPartner :name="user.name" :bc="user.bc" />
+    <NavPartner />
     <!-- NEW ORDER -->
     <UContainer class="pb-16">
       <h2 class="mb-8">Újra rendelés</h2>
