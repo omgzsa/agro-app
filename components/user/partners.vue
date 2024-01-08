@@ -1,7 +1,7 @@
 <script setup>
-const { title, partners } = defineProps({
+const { title, partnereim } = defineProps({
   title: String,
-  partners: [Array, Object],
+  partnereim: [Array, Object],
 });
 
 const columns = [
@@ -10,15 +10,15 @@ const columns = [
     label: 'BC azonosító',
   },
   {
-    key: 'Name',
+    key: 'nev',
     label: 'Név',
   },
   {
-    key: 'City',
+    key: 'varos',
     label: 'Város',
   },
   {
-    key: 'Address',
+    key: 'cim',
     label: 'Cím',
   },
   {
@@ -41,10 +41,10 @@ const slugify = (str) => {
 
 const filteredRows = computed(() => {
   if (!query.value) {
-    return partners.value;
+    return partnereim;
   }
 
-  return partners.value.filter((person) => {
+  return partnereim.filter((person) => {
     return Object.values(person).some((value) => {
       return String(value).toLowerCase().includes(query.value.toLowerCase());
     });
@@ -79,7 +79,7 @@ const filteredAndPaginatedLength = computed(() => {
     >
       <template #actions-data="{ row }">
         <UButton
-          :to="`/uzletkoto/partnereim/${row.No}-${slugify(row.Name)}`"
+          :to="`/uzletkoto/partnereim/${row.No}-${slugify(row.nev)}`"
           :ui="{ rounded: 'rounded-full' }"
         >
           Partnerhez
