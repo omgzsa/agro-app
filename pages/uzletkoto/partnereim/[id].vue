@@ -13,6 +13,7 @@ import rendelesek from '@/assets/0032-rendelesek.json';
 
 const directus_user = useDirectusUser();
 const base_url = useDirectusUrl();
+
 const { data: user } = await useFetch(
   `${base_url}/users/${directus_user.value.id}?fields=first_name,last_name,uzletkoto.*`
 );
@@ -138,21 +139,27 @@ const filteredRows = computed(() => {
         <UInput v-model="q" placeholder="Megrendelés keresése" />
       </div>
       <UModal v-model="isOpen">
-        <div class="p-4">
-          <div v-for="entry in selectedEntries" :key="entry" class="p-2">
-            <p>
-              <span class="text-agro-100">Rendelés szám:</span>
-              {{ entry.Document_No }}
-            </p>
-            <p><span class="text-agro-100">Termék kód:</span> {{ entry.No }}</p>
-            <p>
-              <span class="text-agro-100">Termék:</span> {{ entry.Description }}
-            </p>
-            <p class="pb-2">
-              <span class="text-agro-100">Mennyiség:</span> {{ entry.Amount }}
-              <span>{{ entry.Unit_of_Measure }}</span>
-            </p>
-            <hr />
+        <div class="px-10 py-8">
+          <h3 class="mb-8">Rendelés részletei</h3>
+          <div v-for="(entry, index) in selectedEntries" :key="entry">
+            <div class="pb-4">
+              <p>
+                <span class="text-agro-100">Rendelés szám:</span>
+                {{ entry.Document_No }}
+              </p>
+              <p>
+                <span class="text-agro-100">Termék kód:</span> {{ entry.No }}
+              </p>
+              <p>
+                <span class="text-agro-100">Termék:</span>
+                {{ entry.Description }}
+              </p>
+              <p class="pb-4">
+                <span class="text-agro-100">Mennyiség:</span> {{ entry.Amount }}
+                <span>{{ entry.Unit_of_Measure }}</span>
+              </p>
+              <hr />
+            </div>
           </div>
         </div>
       </UModal>
