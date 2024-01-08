@@ -32,7 +32,9 @@ function removeItem() {
 </script>
 
 <template>
-  <div class="flex flex-row items-center gap-6">
+  <div
+    class="space-y-3 sm:space-y-0 sm:flex sm:flex-row sm:items-center sm:gap-6"
+  >
     <UFormGroup label="Termék">
       <USelectMenu
         searchable
@@ -41,7 +43,7 @@ function removeItem() {
         :value="product"
         @update:modelValue="updateProduct"
         :options="products"
-        class="w-96"
+        class="max-w-sm sm:w-64"
         :model-value="product"
       />
     </UFormGroup>
@@ -51,6 +53,7 @@ function removeItem() {
         @update:modelValue="updateMeasure"
         type="number"
         :min="1"
+        class="max-w-sm"
       />
       <!-- <UInput
         :value="measureValue"
@@ -70,12 +73,35 @@ function removeItem() {
         :value="packaging"
         @update:modelValue="updatePackaging"
         :options="packagingOptions"
+        class="max-w-sm"
       />
     </UFormGroup>
-    <Icon
+    <!-- <Icon
       @click="removeItem"
       name="heroicons:minus-circle-16-solid"
       class="mt-6 cursor-pointer"
+    /> -->
+    <UButton
+      @click="removeItem"
+      :padded="false"
+      color="gray"
+      variant="link"
+      icon="i-heroicons-x-mark-20-solid"
+      class="hidden pt-6 cursor-pointer sm:flex hover:text-red-600"
+      title="Termék eltávolítása"
     />
+    <UButton
+      @click="removeItem"
+      label="Termék eltávolítása"
+      :padded="false"
+      color="gray"
+      variant="link"
+      class="block cursor-pointer hover:font-bold hover:text-red-500 sm:hidden"
+      title="Termék eltávolítása"
+    >
+      <template #leading>
+        <Icon name="heroicons:x-mark-20-solid" size="18" />
+      </template>
+    </UButton>
   </div>
 </template>
