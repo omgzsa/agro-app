@@ -22,7 +22,7 @@ const { data: ugyfel } = await useFetch(
   `${base_url}/items/ugyfel/${id}?fields=nev,varos,iranyitoszam,cim`
 );
 
-const { data: partnerProducts } = useFetch(
+const { data: partnerProducts } = await useFetch(
   `${base_url}/items/partnerTermekek?fields=termekleiras&filter[_and][0][partner][ugyfel_No][_eq]=${id}`
 );
 
