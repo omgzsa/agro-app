@@ -43,7 +43,7 @@ function removeItem() {
         :value="product"
         @update:modelValue="updateProduct"
         :options="products"
-        class="max-w-sm sm:w-64"
+        class="max-w-sm sm:w-64 md:w-80 lg:w-96"
         :model-value="product"
       />
     </UFormGroup>
@@ -76,11 +76,6 @@ function removeItem() {
         class="max-w-sm"
       />
     </UFormGroup>
-    <!-- <Icon
-      @click="removeItem"
-      name="heroicons:minus-circle-16-solid"
-      class="mt-6 cursor-pointer"
-    /> -->
     <UButton
       @click="removeItem"
       :padded="false"
